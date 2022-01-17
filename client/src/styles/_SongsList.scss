@@ -1,0 +1,107 @@
+.songs_list {
+  padding-bottom: 2rem;
+  &__top_row {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 24px 6.8fr 7.2fr 24px;
+    column-gap: 1rem;
+
+    &.album {
+      grid-template-columns: 24px 14fr 24px;
+    }
+  }
+
+  & > hr {
+    margin: 0.3rem 0 1.2rem 0;
+  }
+
+  & > h2 {
+    margin-top: 3rem;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 16px 7fr 4fr 4fr;
+    column-gap: 1rem;
+    margin-bottom: 5px;
+
+    &.album {
+      grid-template-columns: 16px 11fr 4fr;
+    }
+
+    &__digit {
+      @include flex(center, column, center);
+      cursor: pointer;
+    }
+
+    &__duration {
+      @include flex(center, row, flex-end);
+      gap: 1rem;
+      position: relative;
+
+      & > span {
+        cursor: pointer;
+      }
+
+      &__playlists_list {
+        position: absolute;
+        bottom: 120%;
+        overflow-y: scroll;
+        width: 200px;
+        height: 150px;
+        background-color: $dark;
+
+        & p {
+          border-bottom: 1px solid green;
+          padding: 3px;
+          cursor: pointer;
+        }
+
+        &::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #201c29;
+          border-radius: 10px;
+          box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+            inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+        }
+
+        &::-webkit-scrollbar-track {
+          background: linear-gradient(
+            90deg,
+            #201c29,
+            #201c29 1px,
+            #17141d 0,
+            #17141d
+          );
+        }
+      }
+    }
+
+    &__album_title {
+      margin-left: 1rem;
+      flex: 2;
+    }
+
+    &__info {
+      @include flex();
+      gap: 1rem;
+      flex: 2;
+
+      & .playButton:hover {
+        cursor: pointer;
+      }
+
+      & > img {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+
+      &__text {
+        @include flex(flex-start, column);
+      }
+    }
+  }
+}

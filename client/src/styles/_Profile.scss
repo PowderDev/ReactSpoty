@@ -1,0 +1,67 @@
+.profile__header {
+  @include flex(flex-end);
+  gap: 3rem;
+  padding: 2.5rem 4rem;
+  background-color: $blue;
+  margin-top: 1rem;
+  position: relative;
+
+  &__btns {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    @include flex();
+    gap: 1rem;
+
+    &__btn {
+      color: $light;
+      padding: 5px;
+      padding-right: 7px;
+      background-color: $blue;
+      border-radius: 20px;
+      border: 2px solid green;
+      @include flex();
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  }
+
+  &__image {
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+    & > img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    &__cover {
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: $light;
+      cursor: pointer;
+      @include flex(center, row, center);
+
+      & > span {
+        color: $dark;
+        font-size: 3rem;
+      }
+    }
+  }
+
+  &__info {
+    @include flex(flex-start, column);
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    & > h1 {
+      font-size: 3.5rem;
+    }
+  }
+}

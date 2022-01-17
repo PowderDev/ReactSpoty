@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;1,600&display=swap");
+@import "./Variables";
+
+html,
+body {
+  height: 100vh;
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #201c29;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.35),
+      inset -2px -2px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  &::-webkit-scrollbar-track {
+    background: linear-gradient(
+      90deg,
+      #201c29,
+      #201c29 1px,
+      #17141d 0,
+      #17141d
+    );
+  }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: $light;
+}
+
+@import "./Sidebar";
+@import "./Right_side";
+@import "./Collection-header";
+@import "./Form";
+@import "./Profile";
+@import "./Player";
+@import "./UploadForm";
+@import "./Modal";
+@import "./SearchPage";
+@import "./SongsList";

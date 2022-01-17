@@ -1,0 +1,44 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background-color: $blue;
+  display: none;
+  border-radius: 7px;
+  z-index: 100;
+  &.open {
+    @include flex(center, row, center);
+  }
+
+  &__create_playlist {
+    @include flex(center, column, center);
+    gap: 1.5rem;
+    width: 80%;
+    height: 100%;
+
+    & > button {
+      color: $dark;
+      padding: 0.5rem 1rem;
+      font-size: 1.15rem;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    &__title {
+      @include flex();
+      gap: 0.7rem;
+      width: 100%;
+
+      & input {
+        width: 100%;
+        padding: 5px;
+        font-size: 1.15rem;
+        border-radius: 5px;
+        color: $dark;
+      }
+    }
+  }
+}

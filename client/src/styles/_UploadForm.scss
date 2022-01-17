@@ -1,0 +1,87 @@
+.song_form {
+  margin-top: 6%;
+  height: 100%;
+  @include flex(center, row, center);
+
+  & > form {
+    @include flex(flex-start, column);
+    gap: 1rem;
+    width: 600px;
+  }
+
+  &__error {
+    color: red;
+    margin-top: -10px;
+  }
+
+  &__title {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    column-gap: 1rem;
+    align-items: center;
+    width: 100%;
+
+    & > input {
+      width: 100%;
+      padding: 5px;
+      font-size: 1.15rem;
+      border-radius: 5px;
+      color: $dark;
+    }
+  }
+
+  &__upload {
+    @include flex(flex-start, column);
+    gap: 1rem;
+
+    &__info {
+      @include flex();
+      gap: 1rem;
+    }
+
+    &__info > img {
+      width: 200px;
+      height: 200px;
+    }
+
+    &__info > button {
+      @include flex(center, row, center);
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      width: 8rem;
+      background-color: $grey;
+      color: $light;
+      border-radius: 7px;
+      cursor: pointer;
+      border: 1px solid green;
+    }
+
+    &__audios {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      row-gap: 0.7rem;
+      column-gap: 0.5rem;
+      width: 100%;
+
+      & div {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        align-items: center;
+      }
+    }
+  }
+
+  &__select {
+    width: 100%;
+  }
+
+  & > form > button {
+    margin: 0 auto;
+    color: $dark;
+    padding: 0.5rem 1rem;
+    font-size: 1.15rem;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+}

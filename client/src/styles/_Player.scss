@@ -1,0 +1,63 @@
+.player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 90%;
+  background-color: $blue;
+  @include flex(center, row, space-between);
+  padding: 0.5rem 1rem;
+
+  &__info {
+    @include flex();
+    gap: 1rem;
+    flex: 1;
+
+    & > img {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
+
+  &__playbox {
+    @include flex(center, column);
+    flex: 3;
+    gap: 0.5rem;
+
+    &__top {
+      @include flex();
+      gap: 1rem;
+      margin-top: -10px;
+
+      & .material-icons {
+        cursor: pointer;
+      }
+
+      & .material-icons.disabled {
+        cursor: not-allowed;
+
+        &:active {
+          pointer-events: none;
+        }
+      }
+
+      & .material-icons:nth-child(2) {
+        font-size: 2rem;
+      }
+    }
+
+    &__bot {
+      width: 50%;
+      @include flex();
+      gap: 10px;
+
+      & > input {
+        width: 80%;
+      }
+    }
+  }
+
+  &__volume {
+    @include flex();
+    flex: 1;
+  }
+}

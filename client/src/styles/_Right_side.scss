@@ -1,0 +1,205 @@
+.right_side {
+  margin-left: $sidebar-width;
+  width: $right_side-width;
+  min-height: 100vh;
+  background-color: $dark;
+  padding: 1rem 2rem;
+  padding-bottom: 5rem;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.navbar {
+  @include flex(center, row, space-between);
+  position: relative;
+
+  &__arrows {
+    @include flex();
+    gap: 1rem;
+
+    & > span {
+      background-color: $grey;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      @include flex(center, row, center);
+
+      &.disabled {
+        background-color: $dark;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-right: 5rem;
+
+    &__item {
+      width: 120px;
+      height: 28px;
+      border-radius: 7px;
+      border: 2px solid rgb(46, 65, 46);
+      outline: none;
+      background-color: $super-dark;
+      cursor: pointer;
+
+      &:active {
+        transform: scale(0.97);
+      }
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 120%;
+    right: 0%;
+    background-color: $super-dark;
+    width: 200px;
+    height: 75px;
+    padding: 0.5rem;
+    border-radius: 7px;
+    z-index: 10;
+
+    &__item {
+      padding: 5px;
+      cursor: pointer;
+      border-radius: 7px;
+    }
+
+    &__item:hover {
+      background-color: $grey;
+    }
+  }
+
+  &__profile {
+    @include flex();
+    gap: 5px;
+    cursor: pointer;
+    background-color: $dark;
+    border-radius: 12px;
+    user-select: none;
+
+    & > img {
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.cards_container {
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+  & > h2 {
+    margin: 1rem 0 0.7rem 0;
+  }
+
+  &:nth-of-type(2) {
+    margin-top: 3rem;
+  }
+
+  & .vertical_cards_container {
+    @include flex();
+    gap: 3rem;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #201c29;
+      border-radius: 10px;
+      box-shadow: inset 2px 2px 2px hsla(0, 0%, 100%, 0.25),
+        inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: linear-gradient(
+        90deg,
+        #201c29,
+        #201c29 1px,
+        #17141d 0,
+        #17141d
+      );
+    }
+
+    & .vertical_card {
+      @include flex(flex-start, column);
+      cursor: pointer;
+      height: 280px;
+      width: 280px;
+      min-width: 250px;
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: #17141d;
+      box-shadow: -1rem 0 3rem #000;
+      transition: 0.2s;
+      margin: 0;
+      scroll-snap-align: start;
+      clear: both;
+      position: relative;
+
+      &:focus-within ~ &,
+      &:hover ~ & {
+        transform: translateX(130px);
+      }
+
+      &:hover {
+        transform: translateX(-1rem);
+      }
+
+      &:not(:first-child) {
+        margin-left: -100px;
+      }
+
+      & > img {
+        width: 180px;
+        height: 150px;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  & .horizontal_cards_container {
+    @include flex();
+    gap: 1rem;
+
+    & .horizontal_card {
+      background-color: rgba($horizontal_card-bg-color, 0.2);
+      @include flex();
+      border-radius: 10px;
+      gap: 15px;
+      position: relative;
+      cursor: pointer;
+      flex: 1;
+
+      & > img {
+        width: 4rem;
+        height: 4rem;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+
+      & .play_btn {
+        opacity: 0;
+        position: absolute;
+        color: rgba($success, 0.7);
+        font-size: 3rem;
+        top: 50%;
+        right: 5%;
+        transform: translateY(-50%);
+        user-select: none;
+      }
+
+      &:hover {
+        & .play_btn {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+$primary: #0275d8;
+$danger: #d9534f;
+$success: #5cb85c;
+$light: #fbfeff;
+$super-dark: #222023;
+$dark: #343135;
+$blue: #19303b;
+$grey: #5e5c5c;
+$font-main: "Montserrat", sans-serif;
+
+$sidebar-width: 15%;
+$sidebar-bg-color: #212529;
+
+$right_side-width: calc(100% - $sidebar-width);
+$right_side-bg-color: #343a40;
+
+$horizontal_card-bg-color: #f1faee;
+
+@mixin flex($align: center, $dir: row, $jc: start) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: $jc;
+  align-items: $align;
+}
