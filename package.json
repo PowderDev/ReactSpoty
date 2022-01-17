@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "concurrently \"yarn --cwd client start\" \"yarn --cwd server start\"",
-    "build": "yarn --cwd client build && yarn --cwd server build"
+    "build": "yarn --cwd client build && yarn --cwd server build",
+    "heroku-postbuild": "yarn --cwd client && yarn --cwd server"
   }
 }
