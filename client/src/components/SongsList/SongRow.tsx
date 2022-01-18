@@ -101,12 +101,16 @@ const SongRow: FC<Props> = ({ song, i, type, authors, handleClickOnButton }) => 
           style={{ display: `${playlistsListIsOpen ? 'block' : 'none'}` }}
           className='songs_list__row__duration__playlists_list'
         >
-          {myPlaylists.length > 0 &&
+          
+          {myPlaylists.length > 0 ?
             myPlaylists.map((pl) => (
               <p key={pl.id} onClick={() => handleAddingSongToPlaylist(pl.id, song.id)}>
                 { editTitle(pl.title, 25) }
               </p>
-            ))}
+            ))
+              
+            : <h4>You have no playlists yet</h4>
+          }
         </div>
 
         <p>{millisToMinutesAndSeconds(song.duration)}</p>

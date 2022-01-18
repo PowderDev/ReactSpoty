@@ -49,7 +49,12 @@
         overflow-y: scroll;
         width: 200px;
         height: 150px;
-        background-color: $dark;
+        background-color: $super-dark;
+
+        & h4 {
+          margin-top: 0.5rem;
+          text-align: center;
+        }
 
         & p {
           border-bottom: 1px solid green;

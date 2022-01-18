@@ -37,8 +37,8 @@ function Player() {
       }
     }
 
-    if (currentSong?.id) {
-      if (audio || paused) {
+    if (currentSong?.id && user?.id) {
+      if (audio && !paused) {
         audio.pause()
       }
 
@@ -50,16 +50,18 @@ function Player() {
       audio.ontimeupdate = () => { dispatch(setCurrentTime(secondsToMillis(audio.currentTime))) }
       audio.onended = async () => {
         await addListener(currentSong.id, playlistId)
-        handleNextSong('forward')
+        if (currentSongIdx !== -1) {
+          handleNextSong('forward')
+        }
       }
 
       audio.volume = volume
-      if (!paused) {
+      if (audio && !paused) {
         audio.play()
-      }
+      } 
       setAudio(audio)
 
-    } else if ( localStorage.getItem('currentSong') && localStorage.getItem('token') ) {
+    } else if ( localStorage.getItem('currentSong') && user?.id && !currentSong.id) {
       const volume = localStorage.getItem('volume')
       const currentTime = localStorage.getItem('currentTime')
 
@@ -70,7 +72,6 @@ function Player() {
       if (currentTime) {
         setChangedTime( millisToSeconds(Number(currentTime)) )
       }
-
 
       dispatch(setCurrentSong(JSON.parse(localStorage.getItem('currentSong')!)))
       dispatch(setPaused(true))

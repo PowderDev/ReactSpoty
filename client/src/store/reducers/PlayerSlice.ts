@@ -7,7 +7,7 @@ const initialState: PlayerState = {
   currentSongIdx: null,
   paused: true,
   currentTime: 0,
-  volume: 0.2,
+  volume: 0.15,
   songsList: [],
   playlistId: undefined
 }
