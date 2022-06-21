@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "concurrently \"yarn --cwd client start\" \"yarn --cwd server start\"",
+    "install": "concurrently \"yarn --cwd client install\" \"yarn --cwd server install\"",
     "build": "yarn --cwd client build && yarn --cwd server build"
   }
 }

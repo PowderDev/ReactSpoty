@@ -1,13 +1,13 @@
-import React, { FC } from 'react'
-import { useDispatch } from 'react-redux'
-import { ISong, IUser } from '../../../../shared/models'
-import { useAppSelector } from '../../helpers/hooks/redux'
-import { setPaused, setSongsList, setCurrentSong } from '../../store/reducers/PlayerSlice'
-import SongRow from './SongRow'
+import React, { FC } from "react"
+import { useDispatch } from "react-redux"
+import { ISong, IUser } from "../../../../shared/models"
+import { useAppSelector } from "../../helpers/hooks/redux"
+import { setPaused, setSongsList, setCurrentSong } from "../../store/reducers/PlayerSlice"
+import SongRow from "./SongRow"
 
 interface Props {
   songs: ISong[]
-  type: 'playlist' | 'profile' | 'album'
+  type: "playlist" | "profile" | "album"
   authors?: IUser[]
   playlistId?: number
 }
@@ -29,19 +29,26 @@ const SongsList: FC<Props> = ({ songs, type, authors, playlistId }) => {
     return <></>
   }
   return (
-    <div className='songs_list'>
-      { type == 'profile' && <h2>Most Popular</h2> }
-      <div className={ `songs_list__top_row ${ type == 'album' ? 'album' : '' }` }>
+    <div className="songs_list">
+      {type == "profile" && <h2>Most Popular</h2>}
+      <div className={`songs_list__top_row ${type == "album" ? "album" : ""}`}>
         <p>#</p>
         <p>Title</p>
-        { type != 'album' ? <p>Album</p> : '' }
-        <span className='material-icons'> schedule </span>
+        {type != "album" ? <p>Album</p> : ""}
+        <span className="material-icons"> schedule </span>
       </div>
 
       <hr />
 
       {songs?.map((song, i) => (
-        <SongRow handleClickOnButton={handleClickOnButton} type={type} key={song.id} authors={authors} song={song} i={i}/>
+        <SongRow
+          handleClickOnButton={handleClickOnButton}
+          type={type}
+          key={song.id}
+          authors={authors}
+          song={song}
+          i={i}
+        />
       ))}
     </div>
   )

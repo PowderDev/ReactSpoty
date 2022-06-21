@@ -1,33 +1,21 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import {
   millisToMinutesAndSeconds,
   millisToSeconds,
-  secondsToMillis
-} from '../helpers/helperFuctions'
-import { useAppSelector } from '../helpers/hooks/redux'
-import { addListener } from '../store/actions/songAction'
-import {
-  setCurrentSong,
-  setCurrentTime,
-  setPaused,
-  setVolume
-} from '../store/reducers/PlayerSlice'
+  secondsToMillis,
+} from "../helpers/helperFuctions"
+import { useAppSelector } from "../helpers/hooks/redux"
+import { addListener } from "../store/actions/songAction"
+import { setCurrentSong, setCurrentTime, setPaused, setVolume } from "../store/reducers/PlayerSlice"
 
 function Player() {
   const [audio, setAudio] = useState<HTMLAudioElement>(new Audio())
   const [changedTime, setChangedTime] = useState(0)
-  const {
-    currentSong,
-    currentTime,
-    paused,
-    volume,
-    songsList,
-    currentSongIdx,
-    playlistId
-  } = useAppSelector((state) => state.player)
+  const { currentSong, currentTime, paused, volume, songsList, currentSongIdx, playlistId } =
+    useAppSelector((state) => state.player)
   const dispatch = useDispatch()
-  const { user } = useAppSelector(state => state.user)
+  const { user } = useAppSelector((state) => state.user)
 
   useEffect(() => {
     if (!user?.id) {
@@ -47,39 +35,44 @@ function Player() {
         audio.currentTime = changedTime
       }
 
-      audio.ontimeupdate = () => { dispatch(setCurrentTime(secondsToMillis(audio.currentTime))) }
+      audio.ontimeupdate = () => {
+        dispatch(setCurrentTime(secondsToMillis(audio.currentTime)))
+      }
       audio.onended = async () => {
         await addListener(currentSong.id, playlistId)
         if (currentSongIdx !== -1) {
-          handleNextSong('forward')
+          handleNextSong("forward")
         }
       }
 
       audio.volume = volume
       if (audio && !paused) {
         audio.play()
-      } 
+      }
       setAudio(audio)
-
-    } else if ( localStorage.getItem('currentSong') && user?.id && !currentSong.id) {
-      const volume = localStorage.getItem('volume')
-      const currentTime = localStorage.getItem('currentTime')
+    } else if (localStorage.getItem("currentSong") && user?.id && !currentSong.id) {
+      const volume = localStorage.getItem("volume")
+      const currentTime = localStorage.getItem("currentTime")
 
       if (volume) {
         dispatch(setVolume(JSON.parse(volume)))
       }
 
       if (currentTime) {
-        setChangedTime( millisToSeconds(Number(currentTime)) )
+        setChangedTime(millisToSeconds(Number(currentTime)))
       }
 
-      dispatch(setCurrentSong(JSON.parse(localStorage.getItem('currentSong')!)))
+      dispatch(setCurrentSong(JSON.parse(localStorage.getItem("currentSong")!)))
       dispatch(setPaused(true))
     }
   }, [currentSong, user.id])
 
-  useEffect(() => { paused ? audio?.pause() : audio?.play() }, [paused])
-  useEffect(() => { audio ? (audio.volume = volume) : null }, [volume])
+  useEffect(() => {
+    paused ? audio?.pause() : audio?.play()
+  }, [paused])
+  useEffect(() => {
+    audio ? (audio.volume = volume) : null
+  }, [volume])
   useEffect(() => {
     if (audio && changedTime) {
       audio.currentTime = changedTime
@@ -87,13 +80,10 @@ function Player() {
     }
   }, [changedTime])
 
+  const handleTimeInput = (e: any) => setChangedTime(millisToSeconds(Number(e.target.value)))
 
-  const handleTimeInput = (e: any) =>
-    setChangedTime(millisToSeconds(Number(e.target.value)))
-
-
-  const handleNextSong = (dir: 'forward' | 'backward') => {
-    if (dir == 'forward' && currentSongIdx != null) {
+  const handleNextSong = (dir: "forward" | "backward") => {
+    if (dir == "forward" && currentSongIdx != null) {
       if (songsList.length > 0 && songsList.length == currentSongIdx + 1) {
         dispatch(setCurrentSong(songsList[0]))
       } else {
@@ -108,44 +98,47 @@ function Player() {
     }
   }
 
-
   if (!currentSong?.id || !user?.id) return <></>
   return (
-    <div className='player'>
-      <div className='player__info'>
-        <img src={currentSong.image} alt='' />
-        <div className='player__info__text'>
+    <div className="player">
+      <div className="player__info">
+        <img src={currentSong.image} alt="" />
+        <div className="player__info__text">
           <p>{currentSong.title}</p>
-          <p>{currentSong.users.map((u) => u.nickname).join(', ')}</p>
+          <p>{currentSong.users.map((u) => u.nickname).join(", ")}</p>
         </div>
       </div>
 
-      <div className='player__playbox'>
-        <div className='player__playbox__top'>
+      <div className="player__playbox">
+        <div className="player__playbox__top">
           <span
             className={`material-icons ${
-              !currentSongIdx || currentSongIdx - 1 < 0 ? 'disabled' : ''
+              !currentSongIdx || currentSongIdx - 1 < 0 ? "disabled" : ""
             }`}
-            onClick={() => handleNextSong('backward')}
-          > skip_previous </span>
-          <span
-            className='material-icons'
-            onClick={() => dispatch(setPaused(!paused))}
-          > {paused ? 'play_circle' : 'pause_circle'} </span>
+            onClick={() => handleNextSong("backward")}
+          >
+            {" "}
+            skip_previous{" "}
+          </span>
+          <span className="material-icons" onClick={() => dispatch(setPaused(!paused))}>
+            {" "}
+            {paused ? "play_circle" : "pause_circle"}{" "}
+          </span>
           <span
             className={`material-icons ${
-              (currentSongIdx && currentSongIdx >= 0) || !currentSongIdx
-                ? ''
-                : 'disabled'
+              (currentSongIdx && currentSongIdx >= 0) || !currentSongIdx ? "" : "disabled"
             }`}
-            onClick={() => handleNextSong('forward')}
-          > skip_next </span>
+            onClick={() => handleNextSong("forward")}
+          >
+            {" "}
+            skip_next{" "}
+          </span>
         </div>
 
-        <div className='player__playbox__bot'>
+        <div className="player__playbox__bot">
           <small>{millisToMinutesAndSeconds(currentTime)}</small>
           <input
-            type='range'
+            type="range"
             min={0}
             max={currentSong.duration}
             value={currentTime}
@@ -155,10 +148,10 @@ function Player() {
         </div>
       </div>
 
-      <div className='player__volume'>
-        <span className='material-icons'> volume_down </span>
+      <div className="player__volume">
+        <span className="material-icons"> volume_down </span>
         <input
-          type='range'
+          type="range"
           min={0}
           max={100}
           value={volume * 100}

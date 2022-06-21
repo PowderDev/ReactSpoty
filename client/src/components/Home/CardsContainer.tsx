@@ -1,15 +1,15 @@
-import React, { FC } from 'react'
-import Card from './Card'
+import React, { FC } from "react"
+import Card from "./Card"
 
 interface Props {
   title: string
   list: any[]
-  type: 'horizontal' | 'vertical'
-  collectionType: 'user' | 'album' | 'playlist'
+  type: "horizontal" | "vertical"
+  collectionType: "user" | "album" | "playlist"
 }
 
 const CardsContainer: FC<Props> = ({ title, list, type, collectionType }) => (
-  <div className='cards_container'>
+  <div className="cards_container">
     <h2>{title}</h2>
     <div className={`${type}_cards_container`}>
       {list.length > 0 &&
